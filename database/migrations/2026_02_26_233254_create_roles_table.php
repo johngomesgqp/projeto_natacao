@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('roles', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('projeto_id')->nullable()->constrained()->cascadeOnDelete(); // null = role global
+            $table->string('nome');
+            $table->string('slug');
             $table->timestamps();
+            $table->unique(['projeto_id', 'slug']);
+            $table->index('slug');
         });
     }
 

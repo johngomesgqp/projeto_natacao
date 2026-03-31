@@ -13,6 +13,14 @@ return new class extends Migration
     {
         Schema::create('alunos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('projeto_id')->constrained()->cascadeOnDelete();
+            $table->string('nome');
+            $table->date('data_nascimento');
+            $table->string('telefone_responsavel')->nullable();
+            $table->string('nome_responsavel')->nullable();
+            $table->text('observacao')->nullable();
+            $table->boolean('ativo')->default(true);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -11,7 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        //
+        Schema::create('turmas', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('projeto_id')->constrained()->cascadeOnDelete();
+            $table->string('nome');
+            $table->string('nivel'); // iniciante, intermediário, avançado
+            $table->text('descricao')->nullable();
+            $table->boolean('ativa')->default(true);
+            $table->timestamps();
+        });
     }
 
     /**

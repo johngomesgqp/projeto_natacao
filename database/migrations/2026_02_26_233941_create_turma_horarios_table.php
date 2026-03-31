@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('turma_horarios', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('turma_id')->constrained()->cascadeOnDelete();
+            $table->tinyInteger('dia_semana'); // 0=domingo, 6=sábado
+            $table->time('horario');
+            $table->boolean('ativo')->default(true);
             $table->timestamps();
         });
     }

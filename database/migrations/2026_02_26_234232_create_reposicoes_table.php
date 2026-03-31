@@ -13,7 +13,11 @@ return new class extends Migration
     {
         Schema::create('reposicoes', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('aula_original_id')->constrained('aulas')->cascadeOnDelete();
+            $table->foreignId('aula_reposicao_id')->constrained('aulas')->cascadeOnDelete();
+            $table->text('motivo')->nullable();
             $table->timestamps();
+            $table->unique('aula_reposicao_id');
         });
     }
 

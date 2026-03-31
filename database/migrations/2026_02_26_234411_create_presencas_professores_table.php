@@ -13,7 +13,12 @@ return new class extends Migration
     {
         Schema::create('presencas_professores', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('aula_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('professores_id')->constrained()->cascadeOnDelete();
+            $table->boolean('presente')->default(false);
+            $table->text('observacao')->nullable();
             $table->timestamps();
+            $table->unique(['aula_id', 'professores_id']);
         });
     }
 

@@ -20,7 +20,7 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'nome',
         'email',
         'password',
     ];
@@ -55,10 +55,18 @@ class User extends Authenticatable
      */
     public function initials(): string
     {
-        return Str::of($this->name)
+        return Str::of($this->nome)
             ->explode(' ')
             ->take(2)
-            ->map(fn ($word) => Str::substr($word, 0, 1))
+            ->map(fn($word) => Str::substr($word, 0, 1))
             ->implode('');
+    }
+    public function getFilamentName(): string
+    {
+        return $this->nome ?? '';
+    }
+    public function getNameAttribute(): string
+    {
+        return $this->nome ?? 'Usuário'; // retorna o campo "nome", ou "Usuário" como fallback
     }
 }

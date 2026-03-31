@@ -1,6 +1,8 @@
 <?php
 
 namespace Database\Seeders;
+
+use App\Models\Projeto;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
@@ -16,10 +18,20 @@ class DatabaseSeeder extends Seeder
     {
         // User::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Jonisson',
-            'email' => 'jonisson@teste.com',
-            'password' => Hash::make('12345678'),
-        ]);
+
+        {
+            // Cria um projeto
+            $projeto = Projeto::create([
+                'nome' => 'Projeto Natação',
+            ]);
+
+            // Cria um usuário associado ao projeto
+            User::factory()->create([
+                'projeto_id' => $projeto->id,
+                'nome' => 'Jonisson',
+                'email' => 'jonisson@teste.com',
+                'password' => Hash::make('12345678'),
+            ]);
+        }
     }
 }
